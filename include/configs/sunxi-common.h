@@ -293,7 +293,7 @@ extern int soft_i2c_gpio_scl;
 #define SCRIPT_ADDR_R  __stringify(SDRAM_OFFSET(0C50000))
 #define PXEFILE_ADDR_R __stringify(SDRAM_OFFSET(0D00000))
 #define RAMDISK_ADDR_R __stringify(SDRAM_OFFSET(0D50000))
-#else
+#else /* ifdef CONFIG_MACH_SUN8I || CONFIG_MACH_SUNIV */
 /*
  * 160M RAM (256M minimum minus 64MB heap + 32MB for u-boot, stack, fb, etc.
  * 32M uncompressed kernel, 16M compressed kernel, 1M fdt,
@@ -306,8 +306,8 @@ extern int soft_i2c_gpio_scl;
 #define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(3200000))
 #define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(3300000))
 #define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(3400000))
-#endif
-#endif
+#endif /* ifdef CONFIG_MACH_SUN8I || CONFIG_MACH_SUNIV */
+#endif /* ifdef CONFIG_ARM64 */
 
 #define MEM_LAYOUT_ENV_SETTINGS \
 	"bootm_size=" BOOTM_SIZE "\0" \
@@ -328,7 +328,7 @@ extern int soft_i2c_gpio_scl;
 
 #define MEM_LAYOUT_ENV_EXTRA_SETTINGS ""
 
-#endif
+#endif // ifdef CONFIG_ARM64
 
 #define DFU_ALT_INFO_RAM \
 	"dfu_alt_info_ram=" \

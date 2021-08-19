@@ -163,6 +163,10 @@ static int gpio_init(void)
 	sunxi_gpio_set_cfgpin(SUNXI_GPG(6), SUN8I_GPG_UART1);
 	sunxi_gpio_set_cfgpin(SUNXI_GPG(7), SUN8I_GPG_UART1);
 	sunxi_gpio_set_pull(SUNXI_GPG(7), SUNXI_GPIO_PULL_UP);
+#elif CONFIG_CONS_INDEX == 2 && defined(CONFIG_MACH_SUNIV)
+	sunxi_gpio_set_cfgpin(SUNXI_GPA(2), SUNIV_GPE_UART0);
+	sunxi_gpio_set_cfgpin(SUNXI_GPA(3), SUNIV_GPE_UART0);
+	sunxi_gpio_set_pull(SUNXI_GPA(3), SUNXI_GPIO_PULL_UP);
 #else
 #error Unsupported console port number. Please fix pin mux settings in board.c
 #endif
@@ -407,7 +411,6 @@ void reset_cpu(void)
 }
 
 #if !defined(CONFIG_SYS_DCACHE_OFF) && !defined(CONFIG_ARM64) && !defined(CONFIG_CPU_ARM926EJS)
-#if !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) && !defined(CONFIG_ARM64)
 void enable_caches(void)
 {
 	/* Enable D-cache. I-cache is already enabled in start.S */
